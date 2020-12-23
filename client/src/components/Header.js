@@ -1,5 +1,6 @@
 import React from "react";
 import {useSelector} from 'react-redux';
+import {Link} from 'react-router-dom';
 
 const Header = () => {
 
@@ -22,9 +23,9 @@ const Header = () => {
   return (
     <nav>
       <div className="nav-wrapper">
-        <a className="brand-logo">
+        <Link className="brand-logo" to={auth ? '/surveys' : '/'}>
           Feedback
-        </a>
+        </Link>
         <ul className="right hide-on-med-and-down">
           {renderContent()}
         </ul>
