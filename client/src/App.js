@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect} from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Header from './components/Header';
+import Landing from './components/Landing';
+import Surveys from './components/Surveys';
+import {fetchUser} from './actions/index';
+import {useDispatch} from 'react-redux';
 
-function App() {
+const App = () => {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUser());
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <a href="/auth/google">sign up with google</a>
-        </a>
-      </header>
+    <div>
+      <Router>
+        <div>
+          <Header />
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/surveys" component={Surveys} />
+        </div>
+      </Router>
     </div>
   );
 }
