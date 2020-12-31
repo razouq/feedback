@@ -11,7 +11,8 @@
 module.exports = {
   googleClientID: '302621985895-q1c29t9oc5f7j2fhh532bubuha4vuqbg.apps.googleusercontent.com',
   googleClientSecret: 'Cn459txcpz9D3TuryNLsg7xH',
-  mongoURI: 'mongodb://localhost:27017/feedback',
+  // mongoURI: 'mongodb://localhost:27017/feedback',
+  mongoURI: process.env.MONGO_URI,
   cookieKey: 'azenfoziefnazefn',
   stripePublishableKey:
     "pk_test_51I2wqlJtSPYc9UqxBPEo6voV0xp85AnhyQfQzoTl2A6zRMx9rUR80vRzhVAkTrQf7uUUHvZxpciQJXaeghMFzSlG00cUb99jRL",
