@@ -5,7 +5,7 @@ module.exports = (app) => {
     "/auth/google",
     passport.authenticate("google", {
       scope: ["profile", "email"],
-    })
+    }),
   );
 
   // ?code=... is added to the URI, So google strategy will handle the requeste differently
@@ -19,7 +19,6 @@ module.exports = (app) => {
 
   app.get("/api/logout", (req, res) => {
     req.logout();
-    // res.send(req.user);
     res.redirect('/')
   });
 

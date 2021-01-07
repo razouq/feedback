@@ -4,6 +4,5 @@ module.exports = (req, res, next) => {
       error: "You must log in!",
     });
   }
-
   return next();
 }

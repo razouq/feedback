@@ -6,6 +6,7 @@ const keys = require("./config/keys");
 const bodyParser = require('body-parser');
 
 require("./models/User");
+require("./models/Survey");
 require("./services/passport");
 
 mongoose.connect(
@@ -37,7 +38,8 @@ authRoutes(app);
 billingRoutes(app);
 
 app.get('/ping', (req, res) => {
-  res.json(process.env.PONG_ANSWER);
+  console.log(req.cookies);
+  res.json(JSON.stringify(req.cookies));
 });
 
 if(process.env.NODE_ENV === 'production') {
