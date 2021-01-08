@@ -19,6 +19,7 @@ mongoose.connect(
 
 const authRoutes = require("./routes/authRoutes");
 const billingRoutes = require("./routes/billingRoutes");
+const surveyRoutes = require('./routes/surveyRoutes');
 
 const app = express();
 
