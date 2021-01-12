@@ -38,8 +38,10 @@ class Mailer {
   }
 }
 
+module.exports = Mailer;
+
 /**
  * test send mail to many users
  */
-const mail = new Mailer({subject: 'subject', recipients: [{email: "anass@gmail.com"}, {email: "bendarsi@gmail.com"}]}, '<div>hi</div>');
-mail.send();
+// const mail = new Mailer({subject: 'subject', recipients: [{email: "anass@gmail.com"}, {email: "bendarsi@gmail.com"}]}, '<div>hi</div>');
+// mail.send();
