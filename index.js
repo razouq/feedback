@@ -37,6 +37,7 @@ app.use(passport.session());
 
 authRoutes(app);
 billingRoutes(app);
+surveyRoutes(app);
 
 app.get('/ping', (req, res) => {
   console.log(req.cookies);
