@@ -34,7 +34,7 @@ const Header = () => {
 
   return (
     <nav>
-      <div className="nav-wrapper">
+      <div className="nav-wrapper container">
         <Link className="brand-logo" to={auth ? "/surveys" : "/"}>
           Feedback
         </Link>
