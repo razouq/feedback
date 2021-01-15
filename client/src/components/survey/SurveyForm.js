@@ -100,7 +100,7 @@ const SurveyForm = ({ setShowReview }) => {
                 ? "active"
                 : null
             }
-            htmlFor="body"
+            htmlFor="recipients"
           >
             Recipients
           </label>
@@ -110,7 +110,7 @@ const SurveyForm = ({ setShowReview }) => {
             type="text"
             className="validate"
             onFocus={(e) => setActive("recipients")}
-            onBlur={(e) => e.target.value !== "" && setActive(null)}
+            onBlur={(e) => e.target.value === "" && setActive(null)}
             ref={(e) => {
               register(e);
               recipientsRef.current = e;
