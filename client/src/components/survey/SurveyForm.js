@@ -1,9 +1,13 @@
 import React, { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import {createSurvey} from '../../actions';
 
 const SurveyForm = ({ setShowReview }) => {
   const { register, handleSubmit } = useForm();
   const [active, setActive] = useState(null);
+
+  const dispatch = useDispatch();
 
   const titleRef = useRef();
   const subjectRef = useRef();
@@ -11,7 +15,7 @@ const SurveyForm = ({ setShowReview }) => {
   const recipientsRef = useRef();
   
   const onSubmit = (data) => {
-    console.log(data);
+    dispatch(createSurvey(data));
   };
 
   return (
