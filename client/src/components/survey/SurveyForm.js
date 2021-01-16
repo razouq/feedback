@@ -1,11 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
-import {reviewSurvey} from '../../actions';
+import { useDispatch, useSelector } from "react-redux";
+import { reviewSurvey } from "../../actions";
 
 const SurveyForm = ({ setShowReview }) => {
-  const { register, handleSubmit } = useForm();
-  const [active, setActive] = useState(null);
+  const { register, handleSubmit, reset } = useForm();
+  const [active, setActive] = useState();
 
   const dispatch = useDispatch();
 
@@ -13,7 +13,18 @@ const SurveyForm = ({ setShowReview }) => {
   const subjectRef = useRef();
   const bodyRef = useRef();
   const recipientsRef = useRef();
-  
+
+  console.log("render");
+  const theTitle = useSelector(state => state.survey.title)
+
+  // undefined
+  console.log("ref", titleRef?.current?.value);
+
+  useEffect(() => {
+    titleRef.current.value = theTitle;
+    setActive(null);
+  }, [theTitle]);
+
   const onSubmit = (data) => {
     dispatch(reviewSurvey(data));
     setShowReview(true);
@@ -26,9 +37,7 @@ const SurveyForm = ({ setShowReview }) => {
         <div className="input-field">
           <label
             className={
-              active === "title" || titleRef?.current?.value
-                ? "active"
-                : null
+              active === "title" || titleRef?.current?.value ? "active" : null
             }
             htmlFor="title"
           >
@@ -76,9 +85,7 @@ const SurveyForm = ({ setShowReview }) => {
         <div className="input-field">
           <label
             className={
-              active === "body" || bodyRef?.current?.value
-                ? "active"
-                : null
+              active === "body" || bodyRef?.current?.value ? "active" : null
             }
             htmlFor="body"
           >

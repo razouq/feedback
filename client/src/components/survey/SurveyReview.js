@@ -14,7 +14,7 @@ const SurveyReview = ({setShowReview}) => {
       <p>{body}</p>
       <h5>Recipients:</h5>
       <p>{recipients}</p>
-      <button onClick={() => setShowReview(false)} class="waves-effect waves-light btn">Cancel</button>
+      <button onClick={() => setShowReview(false)} className="waves-effect waves-light btn">Cancel</button>
     </div>
   );
 };
