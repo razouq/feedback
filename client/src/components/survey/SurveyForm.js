@@ -14,16 +14,15 @@ const SurveyForm = ({ setShowReview }) => {
   const bodyRef = useRef();
   const recipientsRef = useRef();
 
-  console.log("render");
-  const theTitle = useSelector(state => state.survey.title)
-
-  // undefined
-  console.log("ref", titleRef?.current?.value);
+  const {title, subject, body, recipients} = useSelector(({survey}) => survey)
 
   useEffect(() => {
-    titleRef.current.value = theTitle;
+    titleRef.current.value = title;
+    subjectRef.current.value = subject;
+    bodyRef.current.value = body;
+    recipientsRef.current.value = recipients;
     setActive(null);
-  }, [theTitle]);
+  }, []);
 
   const onSubmit = (data) => {
     dispatch(reviewSurvey(data));
