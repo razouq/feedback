@@ -1,7 +1,7 @@
-import {CREATE_SURVEY} from '../actions/types';
+import {REVIEW_SURVEY} from '../actions/types';
 
 const initialState = {
-  title: 'a',
+  title: '',
   subject: '',
   body: '',
   recipients: '',
@@ -9,7 +9,7 @@ const initialState = {
 
 const surveyReducer =  (state = initialState, action) => {
   switch(action.type) {
-    case CREATE_SURVEY:
+    case REVIEW_SURVEY:
       return action.payload;
     default:
       return state;
