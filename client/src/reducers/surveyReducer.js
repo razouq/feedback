@@ -1,4 +1,4 @@
-import {REVIEW_SURVEY} from '../actions/types';
+import {REVIEW_SURVEY, CLEAN_SURVEY} from '../actions/types';
 
 const initialState = {
   title: '',
@@ -11,6 +11,9 @@ const surveyReducer =  (state = initialState, action) => {
   switch(action.type) {
     case REVIEW_SURVEY:
       return action.payload;
+
+    case CLEAN_SURVEY:
+      return initialState;
     default:
       return state;
   }
