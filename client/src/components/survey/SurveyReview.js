@@ -1,8 +1,23 @@
-import React from 'react';
-import {useSelector} from 'react-redux';
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {useHistory} from 'react-router-dom';
 
-const SurveyReview = ({setShowReview}) => {
-  const {title, subject, body, recipients} = useSelector(state => state.survey);
+import {createSurvey} from '../../actions';
+
+const SurveyReview = ({ setShowReview }) => {
+  const survey = useSelector(
+    (state) => state.survey
+  );
+
+  const { title, subject, body, recipients } = survey;
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const onSubmitSurvey = () => {
+    dispatch(createSurvey(survey));
+    history.push('/surveys');
+  }
   return (
     <div>
       <h3>Review</h3>
@@ -14,7 +29,19 @@ const SurveyReview = ({setShowReview}) => {
       <p>{body}</p>
       <h5>Recipients:</h5>
       <p>{recipients}</p>
-      <button onClick={() => setShowReview(false)} className="waves-effect waves-light btn">Cancel</button>
+      <button
+        onClick={() => setShowReview(false)}
+        className="waves-effect waves-light btn"
+      >
+        Back
+      </button>
+      <button
+        onClick={onSubmitSurvey}
+        type="submit"
+        className="waves-effect waves-light btn right"
+      >
+        Create
+      </button>
     </div>
   );
 };

@@ -21,6 +21,7 @@ export const createSurvey = (survey) => async (dispatch) => {
   // todo: send the request to create a new survey
   // const res = await axios.post('/api/survey/new', survey);
   // todo: clean the survey in redux
+  console.log('create a new survey, api call');
   dispatch({type: CREATE_SURVEY, payload: survey});
 }
 

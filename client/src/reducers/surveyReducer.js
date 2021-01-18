@@ -1,4 +1,4 @@
-import {REVIEW_SURVEY, CLEAN_SURVEY} from '../actions/types';
+import {REVIEW_SURVEY, CLEAN_SURVEY, CREATE_SURVEY} from '../actions/types';
 
 const initialState = {
   title: '',
@@ -14,6 +14,10 @@ const surveyReducer =  (state = initialState, action) => {
 
     case CLEAN_SURVEY:
       return initialState;
+
+    case CREATE_SURVEY:
+      return initialState;
+      
     default:
       return state;
   }
