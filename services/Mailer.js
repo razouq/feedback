@@ -1,10 +1,10 @@
 const nodemailer = require("nodemailer");
 console.log('hi');
 class Mailer {
-  constructor({ subject, recipients }, content) {
+  constructor({ subject, recipient }, content) {
     const mailOptions = {
       from: "no-reply@gmail.com",
-      to: this.formatAddresses(recipients),
+      to: recipient,
       subject,
       html: content,
     };
@@ -21,13 +21,7 @@ class Mailer {
     this.transporter = transporter;
   }
 
-  formatAddresses(recipients) {
-    let formattedRecipients = '';
-    recipients.forEach(r => formattedRecipients += `, ${r.email}`);
-    return formattedRecipients;
-  }
-
-  async send() {
+  send() {
     this.transporter.sendMail(this.mailOptions, function (error, info) {
       if (error) {
         console.log(error);
@@ -39,9 +33,3 @@ class Mailer {
 }
 
 module.exports = Mailer;
-
-/**
- * test send mail to many users
- */
-// const mail = new Mailer({subject: 'subject', recipients: [{email: "anass@gmail.com"}, {email: "bendarsi@gmail.com"}]}, '<div>hi</div>');
-// mail.send();
