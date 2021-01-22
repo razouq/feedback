@@ -4,6 +4,8 @@ const requireCredits = require('../middleWares/requireCredits');
 const recipientSchema = require('../models/Recipient');
 const Mailer = require('../services/Mailer');
 const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
+const crypto = require('crypto');
+// const buffer = require('buffer');
 
 const Survey = mongoose.model('surveys');
 
@@ -13,7 +15,10 @@ module.exports = app => {
 
     console.log(req.body);
 
-    const recipientsArr = recipients.split(',').map(email => ({email: email.trim()}));
+    const recipientsArr = recipients.split(',').map(email => {
+      const token = crypto.randomBytes(16).toString('hex');
+      return ({email: email.trim(), token})
+    });
 
     const survey = new Survey({
       title,
