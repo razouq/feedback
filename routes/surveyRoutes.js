@@ -34,9 +34,8 @@ module.exports = app => {
      * generate a code and add it to the url of the user in the template
      * use promise.all
      */
-    recipientsArr.forEach(recipient => {
-      console.log(recipient);
-      const mailer = new Mailer({subject, recipient: recipient.email}, surveyTemplate(survey));
+    recipientsArr.forEach(({email, token}) => {
+      const mailer = new Mailer({subject, recipient: email, token}, surveyTemplate(survey, token));
       mailer.send();
     });
 
@@ -51,13 +50,12 @@ module.exports = app => {
     }
   });
 
-  app.get('/api/surveys/:surveyId/token/:token/choice/:choice', async (req, res) => {
+  app.get('/api/surveys/token/:token/choice/:choice', async (req, res) => {
     const {surveyId, token, choice} = req.params;
 
     // choice = 'yes' or 'no'
-    
+
     const {nModified} = await Survey.updateOne({
-      _id: surveyId,
       recipients: {
         $elemMatch: {
           token,
