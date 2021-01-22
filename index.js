@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 
 require("./models/User");
 require("./models/Survey");
+require("./models/Recipient");
 require("./services/passport");
 
 mongoose.connect(

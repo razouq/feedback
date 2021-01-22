@@ -9,5 +9,6 @@ const recipientSchema = new Schema({
   },
   token: String,
 })
+mongoose.model('recipients', recipientSchema);
 
 module.exports = recipientSchema;

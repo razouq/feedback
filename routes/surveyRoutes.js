@@ -1,11 +1,9 @@
 const mongoose = require('mongoose');
 const requireLogin = require('../middleWares/requireLogin');
 const requireCredits = require('../middleWares/requireCredits');
-const recipientSchema = require('../models/Recipient');
 const Mailer = require('../services/Mailer');
 const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
 const crypto = require('crypto');
-// const buffer = require('buffer');
 
 const Survey = mongoose.model('surveys');
 
@@ -52,4 +50,29 @@ module.exports = app => {
       return res.status(400).json(e);
     }
   });
+
+  app.get('/api/surveys/:surveyId/token/:token/choice/:choice', async (req, res) => {
+    const {surveyId, token, choice} = req.params;
+
+    // choice = 'yes' or 'no'
+    
+    const {nModified} = await Survey.updateOne({
+      _id: surveyId,
+      recipients: {
+        $elemMatch: {
+          token,
+          responded: false,
+        }
+      }
+    }, {
+      $inc: {[choice]: 1},
+      $set: {'recipients.$.responded': true}
+    })
+
+    if(!nModified) {
+      return res.send('you already gave your feedback!');
+    }
+
+    return res.send('thank you for giving us your feedback!');
+  })
 }
