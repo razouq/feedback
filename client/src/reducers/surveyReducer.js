@@ -4,10 +4,11 @@ const initialState = {
   title: '',
   subject: '',
   body: '',
-  recipients: '',
+  recipients: [],
 };
 
 const surveyReducer =  (state = initialState, action) => {
+  console.log(action);
   switch(action.type) {
     case REVIEW_SURVEY:
       return action.payload;

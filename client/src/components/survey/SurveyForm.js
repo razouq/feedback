@@ -7,27 +7,52 @@ const SurveyForm = ({ setShowReview }) => {
   const { register, handleSubmit, reset } = useForm();
   const [active, setActive] = useState();
 
+  
   const dispatch = useDispatch();
-
+  
   const titleRef = useRef();
   const subjectRef = useRef();
   const bodyRef = useRef();
-  const recipientsRef = useRef();
-
-  const {title, subject, body, recipients} = useSelector(({survey}) => survey)
+  
+  const { title, subject, body, recipients: storeRecipients } = useSelector(({ survey }) => survey);
+  const [recipients, setRecipients] = useState([]);
 
   useEffect(() => {
     titleRef.current.value = title;
     subjectRef.current.value = subject;
     bodyRef.current.value = body;
-    recipientsRef.current.value = recipients;
     setActive(null);
   }, []);
 
   const onSubmit = (data) => {
-    dispatch(reviewSurvey(data));
+    console.log({ ...data, recipients });
+    dispatch(reviewSurvey({...data, recipients}));
     setShowReview(true);
   };
+
+  const addRecipient = (e) => {
+    e.preventDefault();
+    setRecipients([...recipients, ""]);
+  };
+
+  const updateRecipient = (index, e) => {
+    const newRecipients = [...recipients];
+    newRecipients[index] = e.target.value;
+    setRecipients(newRecipients);
+  };
+
+  const renderRecipients = () => {
+    return recipients.map((recipient, index) => (
+      <input
+        key={index}
+        type="text"
+        value={recipient}
+        onChange={(e) => updateRecipient(index, e)}
+      />
+    ));
+  };
+  console.log(renderRecipients());
+  console.log(recipients);
 
   return (
     <div>
@@ -104,31 +129,16 @@ const SurveyForm = ({ setShowReview }) => {
             autoComplete="off"
           />
         </div>
-        <div className="input-field">
-          <label
-            className={
-              active === "recipients" || recipientsRef?.current?.value
-                ? "active"
-                : null
-            }
-            htmlFor="recipients"
-          >
-            Recipients
-          </label>
-          <input
-            name="recipients"
-            id="recipients"
-            type="text"
-            className="validate"
-            onFocus={(e) => setActive("recipients")}
-            onBlur={(e) => e.target.value === "" && setActive(null)}
-            ref={(e) => {
-              register(e);
-              recipientsRef.current = e;
-            }}
-            autoComplete="off"
-          />
-        </div>
+
+        {renderRecipients()}
+
+        <button
+          className="waves-effect waves-light btn red"
+          onClick={(e) => addRecipient(e)}
+        >
+          add Recipient
+        </button>
+
         <button
           // onClick={() => setShowReview(true)}
           type="submit"

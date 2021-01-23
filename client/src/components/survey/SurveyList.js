@@ -9,11 +9,7 @@ const SurveyList = () => {
     dispatch(fetchSurveys());
   }, []);
 
-  const surveys = useSelector((state) => {
-    console.log("state", state);
-    return Object.values(state.surveys);
-  });
-  console.log("sur", surveys);
+  const surveys = useSelector((state) => Object.values(state.surveys));
 
   const renderSurveys = () => {
     return surveys.map(({ title, subject, body, recipients, yes, no }) => (

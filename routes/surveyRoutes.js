@@ -16,7 +16,7 @@ module.exports = app => {
 
     console.log(req.body);
 
-    const recipientsArr = recipients.split(',').map(email => {
+    const recipientsArr = recipients.map(email => {
       const token = crypto.randomBytes(16).toString('hex');
       return ({email: email.trim(), token})
     });

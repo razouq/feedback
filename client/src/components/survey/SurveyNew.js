@@ -11,10 +11,10 @@ const SurveyNew = () => {
 
   useEffect(() => {
     return () => {
-      console.log('bye');
       dispatch(cleanSurvey());
     }
   }, [])
+  
   const [showReview, setShowReview] = useState(false); 
 
   return (
