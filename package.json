@@ -30,6 +30,7 @@
     "cookie-session": "^1.4.0",
     "crypto": "^1.0.1",
     "express": "^4.17.1",
+    "lodash": "^4.17.20",
     "materialize-css": "^1.0.0-rc.2",
     "mongoose": "^5.11.6",
     "nodemailer": "^6.4.17",

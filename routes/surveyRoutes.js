@@ -8,6 +8,9 @@ const crypto = require('crypto');
 const Survey = mongoose.model('surveys');
 
 module.exports = app => {
+  /**
+   * Create Survey
+   */
   app.post('/api/surveys', requireLogin, requireCredits, async (req, res, next) => {
     const {title, subject, body, recipients} = req.body;
 
@@ -49,6 +52,21 @@ module.exports = app => {
       return res.status(400).json(e);
     }
   });
+
+
+  /**
+   * List Surveys
+   */
+  app.get('/api/surveys', async (req, res, next) => {
+    const {user} = req;
+    let surveys;
+    try {
+      surveys = await Survey.find({_user: user});
+    } catch(e) {
+      return next(e);
+    }
+    return res.json(surveys);
+  })
 
   app.get('/api/surveys/token/:token/choice/:choice', async (req, res) => {
     const {surveyId, token, choice} = req.params;
