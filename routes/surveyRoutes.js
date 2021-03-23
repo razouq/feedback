@@ -18,7 +18,7 @@ module.exports = app => {
 
     const recipientsArr = recipients.map(email => {
       const token = crypto.randomBytes(16).toString('hex');
-      return ({email: email.trim(), token})
+      return ({email: email.trim(), token});
     });
 
     const survey = new Survey({

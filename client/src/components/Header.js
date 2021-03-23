@@ -20,7 +20,7 @@ const Header = () => {
       default:
         return (
           <>
-            <li key="paymenys">
+            <li key="payments">
               <Payments />
             </li>
             <li key="credits" style={{ margin: "0 10px" }}>
